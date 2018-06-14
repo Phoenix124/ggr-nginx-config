@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: docker.elastic.co/logstash/logstash-oss:6.2.1
+    depends_on:
+    - ggr
+    ports:
+    - 4444:4444
+    restart: unless-stopped
+    volumes:
+    - ./etc/nginx/conf.d/ggr.conf:/etc/nginx/conf.d/ggr.conf:ro
+
+  ggr:
+    image: aerokube/ggr:latest-release
+    ports:
+    - 5555:5555
+    restart: unless-stopped
+    volumes:
+    - ./etc/grid-router:/etc/grid-router:ro
+    command: ["-listen", ":5555"]

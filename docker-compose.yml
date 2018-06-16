@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nginx:
-    image: docker.elastic.co/logstash/logstash-oss:6.2.1
+    image: nginx:stable-alpine
     depends_on:
     - ggr
     ports:
